@@ -1,6 +1,24 @@
 import "./Journey.css"
+import { useEffect, useState } from "react"
+import { getGithubData } from "../../services/githubService"
 
 function Journey() {
+
+    const [githubData, setGithubData] = useState(null)
+
+    useEffect(() => {
+
+        async function loadGithub() {
+
+            const data = await getGithubData()
+
+            setGithubData(data)
+
+        }
+
+        loadGithub()
+
+    }, [])
 
     const data = {
 
@@ -15,8 +33,46 @@ function Journey() {
             "CSS",
             "JavaScript",
             "React"
+
         ]
+
     }
+
+    if (!githubData) {
+
+        return (
+
+            <div className="journey">
+
+                Carregando GitHub...
+
+            </div>
+
+        )
+
+    }
+
+    const stats = [
+
+        {
+            icon: "🔥",
+            value: data.streak,
+            label: "dias"
+        },
+
+        {
+            icon: "👥",
+            value: githubData.followers,
+            label: "seguidores"
+        },
+
+        {
+            icon: "📁",
+            value: githubData.repositories,
+            label: "repos"
+        }
+
+    ]
 
     const progress = Math.min(
         (data.currentHours / data.weeklyGoal) * 100,
@@ -33,21 +89,28 @@ function Journey() {
 
             <div className="stats">
 
-                <div className="card">
+                {stats.map((item, index) => (
 
-                    🔥
-                    <h3>{data.streak}</h3>
-                    <p>dias</p>
+                    <div
+                        className="card"
+                        key={index}
+                    >
 
-                </div>
+                        <span>
+                            {item.icon}
+                        </span>
 
-                <div className="card">
+                        <h3>
+                            {item.value}
+                        </h3>
 
-                    ⏱️
-                    <h3>{data.studyHours}</h3>
-                    <p>horas</p>
+                        <p>
+                            {item.label}
+                        </p>
 
-                </div>
+                    </div>
+
+                ))}
 
             </div>
 
@@ -62,6 +125,27 @@ function Journey() {
                     <span key={skill}>
                         {skill}
                     </span>
+
+                ))}
+
+            </div>
+
+            <h3>
+                Atividade recente
+            </h3>
+
+            <div className="activity">
+
+                {githubData.recentActivity.map((activity, index) => (
+
+                    <div
+                        className="activity-item"
+                        key={index}
+                    >
+
+                        {activity}
+
+                    </div>
 
                 ))}
 

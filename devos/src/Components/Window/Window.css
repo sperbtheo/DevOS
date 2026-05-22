@@ -60,4 +60,19 @@
 .window-content {
 
     padding: 20px;
+
+    height: calc(100% - 60px);
+
+    overflow-y: auto;
+
+}
+
+.window.maximized {
+
+    width: 95vw !important;
+    height: 88vh !important;
+
+    top: 20px !important;
+    left: 20px !important;
+
 }

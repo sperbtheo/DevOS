@@ -47,7 +47,8 @@ function Desktop() {
             {
                 ...app,
                 zIndex: highestZ,
-                minimized: false
+                minimized: false,
+                maximized: false
             }
 
         ])
@@ -76,6 +77,27 @@ function Desktop() {
                     ? {
                         ...window,
                         minimized: true
+                    }
+
+                    : window
+
+            )
+
+        )
+
+    }
+
+    function handleMaximize(id) {
+
+        setOpenWindows(prev =>
+
+            prev.map(window =>
+
+                window.id === id
+
+                    ? {
+                        ...window,
+                        maximized: !window.maximized
                     }
 
                     : window
@@ -148,9 +170,11 @@ function Desktop() {
                         key={window.id}
                         title={window.title}
                         zIndex={window.zIndex}
+                        maximized={window.maximized}
                         onFocus={() => bringToFront(window.id)}
                         onClose={() => handleClose(window.id)}
                         onMinimize={() => handleMinimize(window.id)}
+                        onMaximize={() => handleMaximize(window.id)}
                     >
 
                         {window.title === "About" && (

@@ -8,7 +8,9 @@ function Window({
     onClose,
     onMinimize,
     onFocus,
-    zIndex
+    onMaximize,
+    zIndex,
+    maximized
 }) {
 
     const nodeRef = useRef(null)
@@ -22,7 +24,8 @@ function Window({
 
             <div
                 ref={nodeRef}
-                className="window"
+                className={`window ${maximized ? "maximized" : ""}`}
+
                 style={{
                     zIndex
                 }}
@@ -37,6 +40,10 @@ function Window({
 
                         <button onClick={onMinimize}>
                             −
+                        </button>
+
+                        <button onClick={onMaximize}>
+                            {maximized ? "❐" : "□"}
                         </button>
 
                         <button onClick={onClose}>

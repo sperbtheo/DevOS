@@ -64,3 +64,23 @@
 
     transition: .5s;
 }
+
+.activity {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+}
+
+.activity-item {
+
+    padding: 12px;
+
+    border-radius: 12px;
+
+    background: rgba(255, 255, 255, .05);
+
+}
