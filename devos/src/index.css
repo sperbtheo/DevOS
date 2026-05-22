@@ -1,163 +1,69 @@
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  --bg-primary: #0b0d12;
+  --bg-1: #0b0d12;
+  --bg-2: #0f1320;
+  --bg-3: #0b0d12;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  --glass: rgba(255, 255, 255, 0.06);
+  --glass-2: rgba(255, 255, 255, 0.08);
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --border: rgba(255, 255, 255, 0.10);
+  --border-2: rgba(255, 255, 255, 0.16);
 
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
-}
-
-body {
-  margin: 0;
-}
-
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-}
-
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
-}
-
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-
-p {
-  margin: 0;
-}
-
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
-}
-
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
-}
-
-:root {
+  --text-primary: rgba(255, 255, 255, 0.92);
+  --text-secondary: rgba(255, 255, 255, 0.68);
 
   --accent-primary: #ff3b5c;
 
-  --desktop-glow-1: rgba(255, 59, 92, .18);
-  --desktop-glow-2: rgba(255, 0, 50, .12);
+  --desktop-glow-1: rgba(255, 59, 92, 0.12);
+  --desktop-glow-2: rgba(255, 59, 92, 0.08);
 
-  --background-1: #09090d;
-  --background-2: #121218;
-  --background-3: #0a0a0f;
-
-  --window-shadow: rgba(255, 59, 92, .15);
-
+  --window: rgba(16, 18, 26, 0.78);
+  --window-shadow: rgba(255, 59, 92, 0.10);
 }
 
+/* Tema Red (default) */
 body.red {
-
   --accent-primary: #ff3b5c;
-
-  --desktop-glow-1: rgba(255, 59, 92, .18);
-  --desktop-glow-2: rgba(255, 0, 50, .12);
-
-  --window-shadow: rgba(255, 59, 92, .15);
-
+  --desktop-glow-1: rgba(255, 59, 92, 0.12);
+  --desktop-glow-2: rgba(255, 59, 92, 0.08);
+  --window-shadow: rgba(255, 59, 92, 0.10);
 }
 
+/* Tema Blue */
 body.blue {
-
   --accent-primary: #00aaff;
-
-  --desktop-glow-1: rgba(0, 170, 255, .18);
-  --desktop-glow-2: rgba(0, 110, 255, .12);
-
-  --window-shadow: rgba(0, 170, 255, .15);
-
+  --desktop-glow-1: rgba(0, 170, 255, 0.12);
+  --desktop-glow-2: rgba(0, 110, 255, 0.08);
+  --window-shadow: rgba(0, 170, 255, 0.10);
 }
 
+/* Tema Purple */
 body.purple {
-
   --accent-primary: #9b59ff;
+  --desktop-glow-1: rgba(155, 89, 255, 0.12);
+  --desktop-glow-2: rgba(110, 0, 255, 0.08);
+  --window-shadow: rgba(155, 89, 255, 0.10);
+}
 
-  --desktop-glow-1: rgba(155, 89, 255, .18);
-  --desktop-glow-2: rgba(110, 0, 255, .12);
+/* Novos temas (mais possibilidades) */
+body.green {
+  --accent-primary: #22c55e;
+  --desktop-glow-1: rgba(34, 197, 94, 0.12);
+  --desktop-glow-2: rgba(34, 197, 94, 0.08);
+  --window-shadow: rgba(34, 197, 94, 0.10);
+}
 
-  --window-shadow: rgba(155, 89, 255, .15);
+body.orange {
+  --accent-primary: #f97316;
+  --desktop-glow-1: rgba(249, 115, 22, 0.12);
+  --desktop-glow-2: rgba(249, 115, 22, 0.08);
+  --window-shadow: rgba(249, 115, 22, 0.10);
+}
 
+body.cyan {
+  --accent-primary: #06b6d4;
+  --desktop-glow-1: rgba(6, 182, 212, 0.12);
+  --desktop-glow-2: rgba(6, 182, 212, 0.08);
+  --window-shadow: rgba(6, 182, 212, 0.10);
 }

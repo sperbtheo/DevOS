@@ -1,5 +1,4 @@
 .taskbar {
-
     position: absolute;
 
     bottom: 20px;
@@ -23,20 +22,19 @@
     justify-content: space-between;
 
     padding: 0 25px;
+
+    color: white;
 }
 
 .taskbar-apps {
-
     display: flex;
     gap: 10px;
-
 }
 
 .taskbar-app {
-
     border: none;
 
-    background: rgba(255, 255, 255, .05);
+    background: rgba(255, 255, 255, 0.05);
 
     color: white;
 
@@ -45,5 +43,13 @@
     border-radius: 10px;
 
     cursor: pointer;
+}
 
+.taskbar-app.active {
+    background: rgba(255, 255, 255, 0.12);
+    outline: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.taskbar-app.minimized {
+    opacity: 0.7;
 }

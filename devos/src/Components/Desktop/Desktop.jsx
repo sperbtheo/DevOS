@@ -1,228 +1,82 @@
-import "./Desktop.css"
-import { useState, useEffect } from "react"
+import "./Desktop.css";
+import { useEffect, useMemo, useState } from "react";
+import Taskbar from "../Taskbar/Taskbar";
+import Icon from "../Icon/Icon";
+import Window from "../Window/Window";
 
-import Taskbar from "../Taskbar/Taskbar"
-import Icon from "../Icon/Icon"
-import Window from "../Window/Window"
-import Terminal from "../Terminal/Terminal"
-import Projects from "../Projects/Projects"
-import Settings from "../Settings/Settings"
-import Journey from "../Journey/Journey"
-
-import { apps } from "../../data/apps"
+import { appRegistry } from "../../data/appRegistry";
+import { useWindowManager } from "../../Hooks/useWindowManager";
 
 function Desktop() {
+    const {
+        openWindows,
+        activeWindowId,
+        openWindow,
+        closeWindow,
+        minimizeWindow,
+        toggleMaximizeWindow,
+        focusWindow,
+        toggleWindowFromTaskbar,
+    } = useWindowManager();
 
-    const [openWindows, setOpenWindows] = useState([])
-    const [highestZ, setHighestZ] = useState(1)
-    const [theme, setTheme] = useState(
-
-        localStorage.getItem("devos-theme") || "red"
-
-    )
+    const [theme, setTheme] = useState(localStorage.getItem("devos-theme") || "red");
 
     useEffect(() => {
+        document.body.className = theme;
+    }, [theme]);
 
-        document.body.className = theme
-
-    }, [theme])
-
-    function handleOpen(app) {
-
-        const alreadyOpen = openWindows.find(
-            window => window.id === app.id
-        )
-
-        if (alreadyOpen) {
-
-            bringToFront(app.id)
-
-            return
-        }
-
-        setOpenWindows(prev => [
-
-            ...prev,
-
-            {
-                ...app,
-                zIndex: highestZ,
-                minimized: false,
-                maximized: false
-            }
-
-        ])
-
-        setHighestZ(prev => prev + 1)
-    }
-
-    function handleClose(id) {
-
-        setOpenWindows(prev =>
-            prev.filter(
-                window => window.id !== id
-            )
-        )
-
-    }
-
-    function handleMinimize(id) {
-
-        setOpenWindows(prev =>
-
-            prev.map(window =>
-
-                window.id === id
-
-                    ? {
-                        ...window,
-                        minimized: true
-                    }
-
-                    : window
-
-            )
-
-        )
-
-    }
-
-    function handleMaximize(id) {
-
-        setOpenWindows(prev =>
-
-            prev.map(window =>
-
-                window.id === id
-
-                    ? {
-                        ...window,
-                        maximized: !window.maximized
-                    }
-
-                    : window
-
-            )
-
-        )
-
-    }
-
-    function bringToFront(id) {
-
-        setOpenWindows(prev =>
-
-            prev.map(window =>
-
-                window.id === id
-
-                    ? {
-                        ...window,
-                        zIndex: highestZ,
-                        minimized: false
-                    }
-
-                    : window
-
-            )
-
-        )
-
-        setHighestZ(prev => prev + 1)
-
-    }
+    const apps = useMemo(() => Object.values(appRegistry), []);
 
     function changeTheme(selectedTheme) {
-
-        setTheme(selectedTheme)
-
-        localStorage.setItem(
-            "devos-theme",
-            selectedTheme
-        )
-
+        setTheme(selectedTheme);
+        localStorage.setItem("devos-theme", selectedTheme);
     }
 
     return (
-
         <div className="desktop">
-
             <div className="desktop-icons">
-
                 {apps.map((app) => (
-
                     <Icon
                         key={app.id}
                         icon={app.icon}
                         title={app.title}
-                        onClick={() => handleOpen(app)}
+                        onClick={() => openWindow(app)}
                     />
-
                 ))}
-
             </div>
 
             {openWindows
-                .filter(window => !window.minimized)
-                .map((window) => (
+                .filter((w) => !w.minimized)
+                .map((w) => {
+                    const AppComponent = appRegistry[w.id]?.component;
 
-                    <Window
-                        key={window.id}
-                        title={window.title}
-                        zIndex={window.zIndex}
-                        maximized={window.maximized}
-                        onFocus={() => bringToFront(window.id)}
-                        onClose={() => handleClose(window.id)}
-                        onMinimize={() => handleMinimize(window.id)}
-                        onMaximize={() => handleMaximize(window.id)}
-                    >
-
-                        {window.title === "About" && (
-                            <>
-                                <h2>Sobre mim</h2>
-                                <p>Olá, eu sou Theo 👋</p>
-                            </>
-                        )}
-
-                        {window.title === "Projects" && (
-
-                            <Projects />
-
-                        )}
-
-                        {window.title === "Terminal" && (
-
-                            <Terminal />
-
-                        )}
-
-                        {window.title === "Settings" && (
-
-                            <Settings
-                                changeTheme={changeTheme}
-                            />
-
-                        )}
-
-                        {window.title === "Journey" && (
-
-                            <Journey />
-
-                        )}
-
-                    </Window>
-
-                ))}
+                    return (
+                        <Window
+                            key={w.id}
+                            title={w.title}
+                            zIndex={w.zIndex}
+                            maximized={w.maximized}
+                            onFocus={() => focusWindow(w.id)}
+                            onClose={() => closeWindow(w.id)}
+                            onMinimize={() => minimizeWindow(w.id)}
+                            onMaximize={() => toggleMaximizeWindow(w.id)}
+                        >
+                            {AppComponent ? (
+                                <AppComponent changeTheme={changeTheme} />
+                            ) : (
+                                <div>App não registrado: {w.id}</div>
+                            )}
+                        </Window>
+                    );
+                })}
 
             <Taskbar
                 openWindows={openWindows}
-                onFocus={bringToFront}
+                activeWindowId={activeWindowId}
+                onToggleWindow={toggleWindowFromTaskbar}
             />
-
         </div>
-
-    )
-
+    );
 }
 
-export default Desktop
+export default Desktop;

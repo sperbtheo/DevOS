@@ -40,3 +40,10 @@
     color: var(--text-primary);
 
 }
+
+.icon-img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    display: block;
+}
