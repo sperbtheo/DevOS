@@ -1,0 +1,42 @@
+.icon {
+
+    width: 80px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 8px;
+
+    cursor: pointer;
+
+    padding: 10px;
+
+    border-radius: 12px;
+
+    transition: .3s;
+
+}
+
+.icon:hover {
+
+    background: var(--glass);
+
+    backdrop-filter: blur(10px);
+
+}
+
+.icon span {
+
+    font-size: 32px;
+
+}
+
+.icon p {
+
+    font-size: 13px;
+
+    color: var(--text-primary);
+
+}

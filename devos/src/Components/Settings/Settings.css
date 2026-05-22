@@ -1,0 +1,49 @@
+.settings {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+
+}
+
+.theme-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+
+}
+
+.theme-button {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 15px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: rgba(255, 255, 255, .05);
+
+    color: white;
+
+    cursor: pointer;
+
+}
+
+.theme-button span {
+
+    width: 20px;
+    height: 20px;
+
+    border-radius: 50%;
+}

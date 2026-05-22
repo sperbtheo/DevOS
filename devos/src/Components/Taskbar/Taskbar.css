@@ -1,0 +1,49 @@
+.taskbar {
+
+    position: absolute;
+
+    bottom: 20px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 90%;
+    height: 60px;
+
+    background: var(--glass);
+
+    backdrop-filter: blur(20px);
+
+    border: 1px solid var(--border);
+
+    border-radius: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 25px;
+}
+
+.taskbar-apps {
+
+    display: flex;
+    gap: 10px;
+
+}
+
+.taskbar-app {
+
+    border: none;
+
+    background: rgba(255, 255, 255, .05);
+
+    color: white;
+
+    padding: 8px 14px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+}

@@ -1,0 +1,57 @@
+.terminal {
+
+    background: #0a0a0a;
+
+    min-height: 300px;
+
+    color: #00ff88;
+
+    font-family: monospace;
+
+    padding: 15px;
+
+    overflow-y: auto;
+
+}
+
+.terminal p {
+
+    margin-bottom: 10px;
+
+    white-space: pre-line;
+
+}
+
+.terminal-input {
+
+    display: flex;
+
+    gap: 10px;
+
+    align-items: center;
+
+}
+
+.terminal-input span {
+
+    color: #ff3b5c;
+
+}
+
+.terminal-input input {
+
+    flex: 1;
+
+    background: transparent;
+
+    border: none;
+
+    outline: none;
+
+    color: white;
+
+    font-family: monospace;
+
+    font-size: 15px;
+
+}
